@@ -18,6 +18,11 @@ app.add_middleware(
 
 MODEL = tf.keras.models.load_model('potatoes.h5')
 CLASS_NAMES = ["Early Blight", "Late Blight", "Healthy"]
+
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}
+
 @app.get("/ping")
 async def ping():
     return "hello, I am Pratham"
