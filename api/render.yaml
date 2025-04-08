@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: potato-disease-api  # Replace with your desired name
+    env: python
+    buildCommand: pip install -r api/requirements.txt  # Install backend dependencies
+    startCommand: uvicorn api.main:app --host 0.0.0.0 --port $PORT  # Start the FastAPI server
+    rootDir: api # Specifies the root directory for the backend
+    healthCheckPath: /health # Add a health check endpoint in your FastAPI app

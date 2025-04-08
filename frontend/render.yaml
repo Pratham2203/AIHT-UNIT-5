@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: potato-disease-api  # Replace with your desired name
+    env: python
+    buildCommand: pip install -r api/requirements.txt  # Install backend dependencies
+    startCommand: uvicorn api.main:app --host 0.0.0.0 --port $PORT  # Start the FastAPI server
+    rootDir: api # Specifies the root directory for the backend
+    healthCheckPath: /health # Add a health check endpoint in your FastAPI app
+  - type: web
+    name: potato-disease-frontend # Replace with your desired name
+    env: static
+    buildCommand: npm install && npm run build  # Install dependencies and build the React app
+    staticPublishPath: frontend/build # Specifies the directory containing the static assets
+    rootDir: frontend
+    routes:
+      - source: /(.*)
+        destination: /index.html
